@@ -33,6 +33,7 @@ end
 local function save_branch_session()
     if utils.inside_git_dir() then
         vim.cmd("mksession! " .. generate_session_filename())
+        vim.notify("Session saved!", vim.log.levels.INFO, notify_options)
     else
         notify_not_in_git_dir_err()
     end
@@ -41,6 +42,7 @@ end
 local function load_branch_session()
     if utils.inside_git_dir() then
         vim.cmd("source " .. generate_session_filename())
+        vim.notify("Session loaded!", vim.log.levels.INFO, notify_options)
     else
         notify_not_in_git_dir_err()
     end
@@ -49,6 +51,7 @@ end
 local function delete_branch_session()
     if utils.inside_git_dir() then
         vim.cmd("silent! !rm " .. generate_session_filename())
+        vim.notify("Session deleted!", vim.log.levels.INFO, notify_options)
     else
         notify_not_in_git_dir_err()
     end
