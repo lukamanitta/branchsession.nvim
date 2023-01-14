@@ -2,6 +2,8 @@ local U = {}
 local config = {}
 local utils = require("branchsession.utils")
 
+local notify_options = { title = "branchsession.nvim" }
+
 local function get_project_name()
     return vim.fn.fnamemodify(
         utils.shell("git rev-parse --show-toplevel"),
@@ -13,7 +15,7 @@ local function notify_not_in_git_dir_err()
     vim.notify(
         "Need to be inside a git project!",
         vim.log.levels.ERROR,
-        { title = "branchsession.nvim" }
+        notify_options
     )
 end
 
