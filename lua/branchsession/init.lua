@@ -63,6 +63,7 @@ function U.setup(opts)
     if not vim.endswith(config.session_root_dir, "/") then
         config.session_root_dir = config.session_root_dir .. "/"
     end
+    vim.fn.system("mkdir " .. config.session_root_dir .. " > /dev/null 2>&1")
 
     vim.api.nvim_create_user_command("BranchSessionSave", function()
         save_branch_session()
