@@ -83,7 +83,10 @@ function U.setup(opts)
                 local session_file = generate_session_filename()
                 if vim.fn.filereadable(session_file) == 1 then
                     vim.notify(
-                        "A session is available for your current branch. Use `:BranchSessionLoad` to load it.",
+                        [[
+A session is available for your current branch.
+Use `:BranchSessionLoad` to load it.
+]]                       ,
                         vim.log.levels.INFO,
                         { title = "branchsession.nvim" }
                     )
