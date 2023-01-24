@@ -76,16 +76,21 @@ function U.setup(opts)
     end, { nargs = 0 })
 
     -- notify user if a branch session is available on startup
-    if utils.inside_git_dir() then
-        local session_file = generate_session_filename()
-        if vim.fn.filereadable(session_file) == 1 then
-            vim.notify(
-                "A session is available for your current branch. Use `:BranchSessionLoad` to load it.",
-                vim.log.levels.INFO,
-                { title = "branchsession.nvim" }
-            )
-        end
-    end
+    vim.api.nvim_create_autocmd("VimEnter", {
+        pattern = { "*" },
+        callback = function()
+            if utils.inside_git_dir() then
+                local session_file = generate_session_filename()
+                if vim.fn.filereadable(session_file) == 1 then
+                    vim.notify(
+                        "A session is available for your current branch. Use `:BranchSessionLoad` to load it.",
+                        vim.log.levels.INFO,
+                        { title = "branchsession.nvim" }
+                    )
+                end
+            end
+        end,
+    })
 end
 
 return U
